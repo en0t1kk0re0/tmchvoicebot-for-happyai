@@ -18,7 +18,6 @@ async def get_assistant_response(prompt: str, assistant_id: str) -> str:
         assistant_id=assistant_id
     )
     
-    # Использование create_and_poll вместо while True
     run = await client.beta.threads.runs.create_and_poll(
         thread_id=thread.id,
         run_id=run.id
