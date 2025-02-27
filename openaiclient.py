@@ -1,7 +1,9 @@
 import asyncio
 from openai import AsyncOpenAI
+from config import settings
 
-client = AsyncOpenAI(api_key="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")
+
+client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
 
 async def get_assistant_response(prompt: str, assistant_id: str) -> str:
     """Получение ответа через Assistant API"""
