@@ -1,7 +1,7 @@
 import asyncio
 from openai import AsyncOpenAI
 
-client = AsyncOpenAI(api_key="YOUR_OPENAI_API_KEY")
+client = AsyncOpenAI(api_key="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")
 
 async def get_assistant_response(prompt: str, assistant_id: str) -> str:
     """Получение ответа через Assistant API"""
@@ -13,14 +13,9 @@ async def get_assistant_response(prompt: str, assistant_id: str) -> str:
         content=prompt
     )
     
-    run = await client.beta.threads.runs.create(
-        thread_id=thread.id,
-        assistant_id=assistant_id
-    )
-    
     run = await client.beta.threads.runs.create_and_poll(
         thread_id=thread.id,
-        run_id=run.id
+        assistant_id=assistant_id
     )
     
     messages = await client.beta.threads.messages.list(thread_id=thread.id)

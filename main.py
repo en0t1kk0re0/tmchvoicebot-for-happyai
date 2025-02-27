@@ -4,9 +4,10 @@ from aiogram.types import Message
 from aiogram.fsm.storage.memory import MemoryStorage
 from utils import save_audio_data_to_file, get_fs_input_file, remove_file
 from openaiclient import process_voice_message, get_assistant_response, generate_voice_response
+from config import settings
 
 
-bot = Bot(token="YOUR_BOT_TOKEN")
+bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
 dp = Dispatcher(storage=MemoryStorage()) 
 
 @dp.message(F.voice)
@@ -20,7 +21,7 @@ async def handle_voice_message(message: Message):
         user_text = await process_voice_message(file_path)
 
         # Шаг 2: Получение ответа от ассистента
-        assistant_response = await get_assistant_response(user_text, "YOUR_ASSISTANT_ID")
+        assistant_response = await get_assistant_response(user_text, settings.ASSISTANT_ID)
 
         # Шаг 3: Текст -> Голос
         audio_data = await generate_voice_response(assistant_response)
