@@ -5,6 +5,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from utils import save_audio_data_to_file, get_fs_input_file, remove_file
 from openaiclient import process_voice_message, get_assistant_response, generate_voice_response
 from config import settings
+from aiogram.types import FSInputFile
 
 
 bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
@@ -28,7 +29,7 @@ async def handle_voice_message(message: Message):
 
         # Шаг 4: Сохранение и отправка голосового ответа
         temp_audio_path = save_audio_data_to_file(audio_data)
-        voice_file = get_fs_input_file(temp_audio_path)
+        voice_file = FSInputFile(file_path)
         await message.answer_voice(voice=voice_file)
 
         # Удаляем временные файлы
