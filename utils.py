@@ -3,7 +3,6 @@ from tempfile import NamedTemporaryFile
 
 def save_audio_data_to_file(audio_data: bytes, suffix: str = ".ogg") -> str:
     """Сохраняет бинарные данные в файл и возвращает путь к файлу"""
-    print("raz raz")
     with NamedTemporaryFile(delete=False, suffix=suffix) as temp_audio:
         temp_audio.write(audio_data)
         return temp_audio.name

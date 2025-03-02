@@ -30,7 +30,7 @@ async def get_assistant_response(prompt: str, assistant_id: str) -> str:
             assistant_id=assistant_id
         )
 
-        if run.status != "completed":
+        if run.status != "completed" and run.status != "requires_action":
             raise Exception(f"Ошибка выполнения: {run.status}")
 
         # Получаем список сообщений из потока
