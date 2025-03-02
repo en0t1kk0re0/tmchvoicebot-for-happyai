@@ -9,12 +9,13 @@ from config import settings
 from aiogram.types import FSInputFile
 from openaiclient import validate_value, save_value
 
-print(settings.TELEGRAM_BOT_TOKEN)
 TELEGRAM_BOT_TOKEN=settings.TELEGRAM_BOT_TOKEN
-print(TELEGRAM_BOT_TOKEN)
 # Инициализация бота
 bot = Bot(token=TELEGRAM_BOT_TOKEN)
 dp = Dispatcher(storage=MemoryStorage())
+import os
+
+print("BOT_TOKEN из окружения:", os.getenv("TELEGRAM_BOT_TOKEN"))
 
 # Обработчик голосового сообщения
 @dp.message(F.voice)
