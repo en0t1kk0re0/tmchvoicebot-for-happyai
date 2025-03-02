@@ -37,13 +37,11 @@ async def handle_voice_message(message: Message):
         print(4)
         # Проверка, является ли ответ ценностью
         if await validate_value(assistant_response):
-            print("workin")
             # Сохраняем ценность в базу данных
             await save_value(message.from_user.id, assistant_response)
             await message.answer("✅ Ценность сохранена!")
         else:
             await message.answer("⚠️ Ценность не прошла проверку. Попробуйте еще раз.")
-
         # Отправляем голосовой ответ пользователю
         voice_file = FSInputFile(voice_file_path)
         await message.answer_voice(voice=voice_file)
