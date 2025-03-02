@@ -9,6 +9,22 @@ from config import settings
 from aiogram.types import FSInputFile
 from openaiclient import validate_value, save_value
 
+import requests
+
+try:
+    response = requests.get("https://api.telegram.org")
+    print(f"Статус Telegram API: {response.status_code}")
+except Exception as e:
+    print(f"Ошибка доступа к Telegram API: {e}")
+    import os
+print("BOT_TOKEN:", os.getenv("BOT_TOKEN"))
+try:
+    response = requests.get("https://www.google.com")
+    print(f"Интернет доступен, статус: {response.status_code}")
+except Exception as e:
+    print(f"Нет интернета на сервере: {e}")
+
+
 
 # Инициализация бота
 bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
