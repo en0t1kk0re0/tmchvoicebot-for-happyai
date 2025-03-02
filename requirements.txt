@@ -33,3 +33,6 @@ SQLAlchemy==2.0.38
 tqdm==4.67.1
 typing_extensions==4.12.2
 yarl==1.18.3
+asyncpg
+SQLAlchemy[asyncio]
+alembic
