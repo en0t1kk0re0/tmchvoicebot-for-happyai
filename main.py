@@ -19,9 +19,7 @@ dp = Dispatcher(storage=MemoryStorage())
 async def handle_voice_message(message: Message):
     try:
         # Получаем голосовое сообщение
-        await asyncio.sleep(2)
         file = await bot.get_file(message.voice.file_id)
-        await asyncio.sleep(2)
         print(f"File ID: {message.voice.file_id}")
         print(f"File Path: {file.file_path}")
         file_path = f"voice_{message.voice.file_id}.ogg"
