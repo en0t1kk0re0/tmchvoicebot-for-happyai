@@ -127,13 +127,19 @@ async def generate_voice_response(text: str) -> bytes:
     audio_data = response.read()
     return save_audio_data_to_file(audio_data)
 
-async def process_voice_message(file_path: str) -> tuple[str, str]:
-    """Обработка голосового сообщения через Whisper"""
-    with open(file_path, "rb") as audio_file:
-        print("file is opened")
-        transcript = await client.audio.transcriptions.create(
-            file=audio_file,
-            model="whisper-1"
-        )
-        print(transcript)
-    return transcript.text, file_path 
+import openai
+
+client = openai.AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
+
+async def process_voice_message(file_path: str):
+    try:
+        with open(file_path, "rb") as audio_file:
+            transcript = await client.audio.transcriptions.create(
+                file=audio_file,
+                model="whisper-1"
+            )
+            print(transcript)
+        return transcript.text, file_path
+    except Exception as e:
+        print("Ошибка в process_voice_message:", e)
+        return None, None
