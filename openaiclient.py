@@ -7,6 +7,9 @@ from sqlalchemy.future import select
 from models import UserValue
 from database import get_db
 import json
+import os
+print("OpenAI API Key:", os.getenv("OPENAI_API_KEY"))
+
 
 import httpx
 
