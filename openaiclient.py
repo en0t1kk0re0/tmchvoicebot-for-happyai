@@ -8,20 +8,6 @@ from models import UserValue
 from database import get_db
 import json
 import os
-print("OpenAI API Key:", os.getenv("OPENAI_API_KEY"))
-
-
-import httpx
-
-async def test_openai_connection():
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get("https://api.openai.com/v1/models")
-            print("OpenAI API доступен:", response.status_code)
-    except Exception as e:
-        print("Ошибка подключения к OpenAI API:", e)
-
-asyncio.run(test_openai_connection())
 
 
 
@@ -132,7 +118,7 @@ async def generate_voice_response(text: str) -> bytes:
 
 import openai
 
-client = openai.AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
+client = openai.AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 async def process_voice_message(file_path: str):
     try:
