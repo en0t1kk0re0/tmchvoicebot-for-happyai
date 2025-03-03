@@ -117,8 +117,10 @@ async def generate_voice_response(text: str) -> bytes:
 async def process_voice_message(file_path: str) -> tuple[str, str]:
     """Обработка голосового сообщения через Whisper"""
     with open(file_path, "rb") as audio_file:
+        print("file is opened")
         transcript = await client.audio.transcriptions.create(
             file=audio_file,
             model="whisper-1"
         )
+        print(transcript)
     return transcript.text, file_path 
