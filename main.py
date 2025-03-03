@@ -22,9 +22,9 @@ async def handle_voice_message(message: Message):
         file = await bot.get_file(message.voice.file_id)
         file_path = f"voice_{message.voice.file_id}.oga"
         download_path = f"./{file_path}"
+        print(f"Загружаем файл: {file.file_path} -> {download_path}")
         await bot.download_file(file.file_path, download_path)
-        print(f"File ID: {message.voice.file_id}")
-        print(f"File Path: {file.file_path}")
+        print(f"Файл скачан: {download_path}")
 
         print(1)
         if not os.path.exists(file_path):
