@@ -13,9 +13,6 @@ TELEGRAM_BOT_TOKEN=settings.TELEGRAM_BOT_TOKEN
 # Инициализация бота
 bot = Bot(token=TELEGRAM_BOT_TOKEN)
 dp = Dispatcher(storage=MemoryStorage())
-import os
-
-print("BOT_TOKEN из окружения:", os.getenv("TELEGRAM_BOT_TOKEN"))
 
 # Обработчик голосового сообщения
 @dp.message(F.voice)
@@ -25,6 +22,7 @@ async def handle_voice_message(message: Message):
         file = await bot.get_file(message.voice.file_id)
         file_path = f"voice_{message.voice.file_id}.ogg"
         download_path = f"./{file_path}"
+        print(file)
         await bot.download_file(file.file_path, download_path)
         print(f"File ID: {message.voice.file_id}")
         print(f"File Path: {file.file_path}")
@@ -62,6 +60,7 @@ async def handle_voice_message(message: Message):
 # Основная функция для запуска бота
 async def main():
     print("🤖 Бот запущен!")
+    print(await bot.me())
     await dp.start_polling(bot)
 
 if __name__ == "__main__":

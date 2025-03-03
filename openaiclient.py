@@ -62,7 +62,6 @@ async def save_value(user_id: int, value: str):
     async for session in get_db():
         new_value = UserValue(user_id=user_id, value=value)
         session.add(new_value)
-        print("workin3")
         await session.commit()
         return new_value
 
@@ -113,7 +112,6 @@ async def generate_voice_response(text: str) -> bytes:
     )
     print("Response:", response)
     audio_data = response.read()
-    print("1 1")
     return save_audio_data_to_file(audio_data)
 
 async def process_voice_message(file_path: str) -> tuple[str, str]:
