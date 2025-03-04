@@ -17,7 +17,7 @@ dp = Dispatcher(storage=MemoryStorage())
 # Обработчик голосового сообщения
 @dp.message(F.voice)
 async def handle_voice_message(message: Message):
-    try:
+    #try:
         # Получаем голосовое сообщение
         file = await bot.get_file(message.voice.file_id)
         file_path = f"voice_{message.voice.file_id}.oga"
@@ -50,8 +50,8 @@ async def handle_voice_message(message: Message):
         remove_file(file_path)
         remove_file(voice_file_path)
 
-    except Exception as e:
-        await message.answer(f"⚠️ Ошибка: {str(e)}")
+    #except Exception as e:
+      #  await message.answer(f"⚠️ Ошибка: {str(e)}")
 
 # Основная функция для запуска бота
 async def main():
