@@ -27,15 +27,7 @@ async def handle_voice_message(message: Message):
         if not os.path.exists(file_path):
             await message.answer(f"Ошибка: файл {file_path} не найден!")
         # Обрабатываем голосовое сообщение и получаем текст
-        print("Перед обработкой голосового сообщения...")
-        try:
-            user_text, _ = await process_voice_message(file_path)
-            print(f"Обработанный текст: {user_text}")
-        except Exception as e:
-            print(f"Ошибка в process_voice_message: {e}")
-            await message.answer("Ошибка при обработке голосового сообщения.")
-            return
-        #user_text, _ = await process_voice_message(file_path)
+        user_text, _ = await process_voice_message(file_path)
         print(2)
         # Получаем ответ ассистента
         assistant_response = await get_assistant_response(user_text, settings.ASSISTANT_ID)

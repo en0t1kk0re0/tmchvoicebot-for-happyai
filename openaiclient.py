@@ -121,7 +121,6 @@ import openai
 client = openai.AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 async def process_voice_message(file_path: str):
-    try:
         with open(file_path, "rb") as audio_file:
             transcript = await client.audio.transcriptions.create(
                 file=audio_file,
@@ -129,6 +128,3 @@ async def process_voice_message(file_path: str):
             )
             print(transcript)
         return transcript.text, file_path
-    except Exception as e:
-        print("Ошибка в process_voice_message:", e)
-        return None, None
