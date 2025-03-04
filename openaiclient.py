@@ -116,10 +116,6 @@ async def generate_voice_response(text: str) -> bytes:
     audio_data = response.read()
     return save_audio_data_to_file(audio_data)
 
-import openai
-
-client = openai.AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
 async def process_voice_message(file_path: str):
         with open(file_path, "rb") as audio_file:
             transcript = await client.audio.transcriptions.create(
