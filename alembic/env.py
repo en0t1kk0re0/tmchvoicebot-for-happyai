@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from alembic import context
-from ..config import settings
+from config import settings
 import os
 DATABASE_URL = os.getenv("DATABASE_URL")
 
